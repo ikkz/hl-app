@@ -5,8 +5,6 @@ import { io, Socket } from "socket.io-client";
 
 import { SERVER } from "../config";
 
-const testRoom = "test_room_id";
-
 export const useSocketIo = createModel(() => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [deviceConnected, setDeviceConnected] = useState(false);
@@ -35,8 +33,6 @@ export const useSocketIo = createModel(() => {
       return nextSocket;
     });
   }, []);
-
-  useMount(() => initSocket(testRoom));
 
   return { socket, initSocket, deviceConnected };
 });
