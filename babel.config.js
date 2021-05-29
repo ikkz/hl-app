@@ -1,16 +1,16 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
-        "import",
+        'import',
         {
-          libraryName: "react-use",
+          libraryName: 'react-use',
+          libraryDirectory: 'lib',
           camel2DashComponentName: false,
         },
       ],
-      "react-native-reanimated/plugin",
     ],
   };
 };

@@ -1,9 +1,8 @@
-import { createModel } from "hox";
-import { useCallback, useEffect, useState } from "react";
-import useMount from "react-use/lib/useMount";
-import { io, Socket } from "socket.io-client";
+import { createModel } from 'hox';
+import { useCallback, useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
-import { SERVER } from "../config";
+import { SERVER } from '../config';
 
 export const useSocketIo = createModel(() => {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -18,18 +17,18 @@ export const useSocketIo = createModel(() => {
       const nextSocket = io(SERVER, {
         query: {
           token,
-          ctype: "client",
+          ctype: 'client',
         },
-        transports: ["websocket", "polling"],
+        transports: ['websocket', 'polling'],
       });
       nextSocket.connect();
       const onDisconnect = () => {
         setDeviceConnected(false);
         nextSocket.close();
       };
-      nextSocket.on("connect", () => setDeviceConnected(true));
-      nextSocket.on("disconnect", onDisconnect);
-      nextSocket.on("hl_device_leave", onDisconnect);
+      nextSocket.on('connect', () => setDeviceConnected(true));
+      nextSocket.on('disconnect', onDisconnect);
+      nextSocket.on('hl_device_leave', onDisconnect);
       return nextSocket;
     });
   }, []);

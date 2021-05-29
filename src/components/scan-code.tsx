@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, StyleSheet, Alert } from "react-native";
-import { Text, Button } from "react-native-elements";
-import { Camera } from "expo-camera";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import { useIsFocused } from "@react-navigation/native";
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Camera } from 'expo-camera';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 
-export const StartScan: React.FC<{ onToken: (token: string) => void }> = ({
+import { useIsFocused } from '@react-navigation/native';
+
+export const ScanCode: React.FC<{ onToken: (token: string) => void }> = ({
   onToken,
 }) => {
   const isFocused = useIsFocused();
@@ -14,7 +15,7 @@ export const StartScan: React.FC<{ onToken: (token: string) => void }> = ({
 
   const askForPermission = useCallback(async () => {
     const { status } = await Camera.requestPermissionsAsync();
-    setHasPermission(status === "granted");
+    setHasPermission(status === 'granted');
   }, []);
 
   if (hasPermission === null) {
@@ -48,19 +49,19 @@ export const StartScan: React.FC<{ onToken: (token: string) => void }> = ({
               if (type === BarCodeScanner.Constants.BarCodeType.qr) {
                 setScanned(true);
                 const continueScan = () => setScanned(false);
-                if (data.startsWith("hld://")) {
+                if (data.startsWith('hld://')) {
                   Alert.alert(
-                    "识别成功",
-                    "是否连接到该设备？",
+                    '识别成功',
+                    '是否连接到该设备？',
                     [
                       {
-                        style: "default",
-                        text: "确认",
+                        style: 'default',
+                        text: '确认',
                         onPress: () => onToken(data),
                       },
                       {
-                        style: "cancel",
-                        text: "取消",
+                        style: 'cancel',
+                        text: '取消',
                         onPress: continueScan,
                       },
                     ],
@@ -70,12 +71,12 @@ export const StartScan: React.FC<{ onToken: (token: string) => void }> = ({
                   );
                 } else {
                   Alert.alert(
-                    "错误",
-                    "不是设备二维码",
+                    '错误',
+                    '不是设备二维码',
                     [
                       {
-                        style: "cancel",
-                        text: "取消",
+                        style: 'cancel',
+                        text: '取消',
                         onPress: continueScan,
                       },
                     ],
@@ -93,30 +94,30 @@ export const StartScan: React.FC<{ onToken: (token: string) => void }> = ({
 
 const styles = StyleSheet.create({
   page: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
   },
   button: {
-    backgroundColor: "black",
+    backgroundColor: 'black',
     height: 180,
     width: 360,
-    textAlign: "center",
+    textAlign: 'center',
   },
   buttonText: {
-    textAlign: "center",
-    color: "white",
+    textAlign: 'center',
+    color: 'white',
     fontSize: 50,
-    height: "100%",
-    textAlignVertical: "center",
+    height: '100%',
+    textAlignVertical: 'center',
   },
   hintText: {
     marginBottom: 10,
   },
   container: {},
   camera: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
 });
