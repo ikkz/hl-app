@@ -12,6 +12,7 @@ import { DesktopScreen } from './screens/desktop';
 import { HomeScreen } from './screens/home';
 import { LoginScreen } from './screens/login';
 import { RecordScreen } from './screens/record';
+import { TaskScreen } from './screens/task';
 import { UserScreen } from './screens/user';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -139,6 +140,13 @@ export const App: React.FC = () => {
           component={RecordScreen}
           options={{
             title: '视屏录制',
+          }}
+        />
+        <Screen
+          name="Task"
+          component={TaskScreen}
+          options={{
+            title: '任务详情',
           }}
         />
       </Navigator>

@@ -1,24 +1,19 @@
-import { noop } from 'lodash';
 import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, ToastAndroid, View } from 'react-native';
 import { Avatar, Button, ListItem, Text } from 'react-native-elements';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useMount from 'react-use/lib/useMount';
 
+import { useNavigation } from '@react-navigation/core';
+
 import { useAuth } from '../hooks/use-auth';
+import { Task } from '../interface';
 import { commonStyles } from '../util/common-style';
 import { request } from '../util/request';
 
-interface Task {
-  complete_time: null | string;
-  create_time: string;
-  id: number;
-  user_tel: string;
-  video: string;
-  result: null | string;
-}
-
 export const UserScreen: React.FC = () => {
+  const { navigate } = useNavigation();
+
   const { user, clearJwt } = useAuth((model) => [
     model.loginned,
     model.user,
@@ -62,7 +57,15 @@ export const UserScreen: React.FC = () => {
         >
           {value
             ? value.map((task) => (
-                <ListItem key={task.id} bottomDivider onPress={noop}>
+                <ListItem
+                  key={task.id}
+                  bottomDivider
+                  onPress={() =>
+                    navigate('Task', {
+                      task,
+                    })
+                  }
+                >
                   <ListItem.Content>
                     <ListItem.Title>{task.create_time}</ListItem.Title>
                     <ListItem.Subtitle>
