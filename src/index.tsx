@@ -11,6 +11,7 @@ import { useInitApp } from './hooks/use-init-app';
 import { DesktopScreen } from './screens/desktop';
 import { HomeScreen } from './screens/home';
 import { LoginScreen } from './screens/login';
+import { RecordScreen } from './screens/record';
 import { UserScreen } from './screens/user';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -134,17 +135,11 @@ export const App: React.FC = () => {
           }}
         />
         <Screen
-          name="Live"
-          component={View}
+          name="Record"
+          component={RecordScreen}
           options={{
-            title: '实时识别',
+            title: '视屏录制',
           }}
-        />
-        <Screen name="Tests" component={View} options={{ title: '测试数据' }} />
-        <Screen
-          name="TestCase"
-          component={View}
-          options={{ title: '测试项目' }}
         />
       </Navigator>
     </NavigationContainer>

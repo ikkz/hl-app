@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "hl.ketra.fun"
     },
     "web": {
       "favicon": "./assets/favicon.png"
