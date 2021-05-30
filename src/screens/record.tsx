@@ -28,6 +28,7 @@ export const RecordScreen: React.FC = () => {
       cameraRef.current
         ?.recordAsync({
           mute: true,
+          quality: Camera.Constants.VideoQuality['480p'],
         })
         .then(({ uri }) => setFileUri(uri))
         .then(() => navigation.goBack());
