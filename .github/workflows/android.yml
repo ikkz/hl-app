@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: tag
-      run: git tag "${{ GITHUB_SHA }}"
+      run: git tag `echo $GITHUB_SHA`
     - name: GH Release
       uses: softprops/action-gh-release@v0.1.5
       with:
