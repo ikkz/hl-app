@@ -9,27 +9,29 @@ import { useSocketIo } from '../hooks/use-socket-io';
 
 export const DesktopScreen: React.FC = () => {
   const { deviceConnected, socket, initSocket } = useSocketIo();
-  const [disbled] = useSync.Disabled();
+  const [startStopDisabled] = useSync.StartStopDisabled();
   const [collect] = useSync.Collect();
-  const [delay, setDelay] = useSync.Delay();
+  const [uploadDisabled] = useSync.UploadDisabled();
   const emitEvent = useEmit();
   return deviceConnected ? (
     <View style={styles.page}>
       <Button
-        disabled={disbled}
+        disabled={startStopDisabled}
         onPress={() => emitEvent('reco_btn')}
         title={collect ? '结束识别' : '开始识别'}
       />
+      <View style={styles.space} />
+      <Button
+        title="上传识别"
+        disabled={uploadDisabled}
+        onPress={() => emitEvent('upload')}
+      />
+      <View style={styles.space} />
       <Button
         onPress={() => socket?.close()}
-        title="取消连接"
+        title="断开连接"
         style={{ backgroundColor: 'red' }}
       />
-      <View style={styles.setting}>
-        <Text>启动延迟：{delay}</Text>
-        <Button onPress={() => setDelay(delay - 1)} title="-" />
-        <Button onPress={() => setDelay(delay + 1)} title="+" />
-      </View>
     </View>
   ) : (
     <ScanCode onToken={initSocket} />
@@ -40,9 +42,11 @@ const styles = StyleSheet.create({
   page: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
+    padding: 60,
   },
-  setting: { display: 'flex', flexDirection: 'row' },
+  space: {
+    height: 20,
+  },
 });

@@ -1,6 +1,6 @@
 import { createModel } from 'hox';
 import { useCallback, useEffect, useState } from 'react';
-import useDeepCompareEffect from 'react-use/lib/useDeepCompareEffect';
+import { useDeepCompareEffect } from 'react-use';
 
 import { useEmit, useEvent } from './use-hl-event';
 import { useSocketIo } from './use-socket-io';
@@ -62,7 +62,8 @@ export const createSyncValue = <T>(name: string, defaultValue: T) => {
 
 export const useSync = {
   Count: createSyncValue('Count', 0),
-  Disabled: createSyncValue('Disabled', true),
+  StartStopDisabled: createSyncValue('StartStopDisabled', true),
   Collect: createSyncValue('Collect', false),
   Delay: createSyncValue('Delay', 2),
+  UploadDisabled: createSyncValue('UploadDisabled', true),
 };

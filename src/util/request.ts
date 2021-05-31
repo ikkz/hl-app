@@ -1,7 +1,8 @@
 import { bind, merge, noop } from 'lodash-es';
 
 export const requestConfig = {
-  baseURL: 'http://thl.ketra.fun:5000',
+  // baseURL: 'http://thl.ketra.fun:5000',
+  baseURL: 'https://thl.ketra.fun:6290',
   jwt: '',
   onResponse: noop,
 };
